@@ -98,7 +98,7 @@ async function loadLearnedKnowledge(db: DB, userId: string, query: string, mode:
     }
     if (!rows.length) return "";
     const lines = rows.slice(0, build ? 36 : 12).map((r) => `- [${r.category ?? "geral"}${r.validation ? ` · ${r.validation}` : ""}] ${r.title}: ${String(r.content ?? "").slice(0, 500)}`);
-    return `## CONHECIMENTO COGNITIVO APRENDIDO (WLC.IA)\n${build ? "OBRIGATÓRIO no Modo Criar: siga estas regras e métodos como padrão de engenharia ao gerar código; só desvie se contradizerem o pedido explícito do usuário.\n" : ""}Aplique quando relevante (regras de negócio, conceitos ensinados, aprendizados de documentos). Itens "conflicting"/"hypothesis" não são certezas.\n${lines.join("\n")}\n\n`;
+    return `## CONHECIMENTO COGNITIVO APRENDIDO (WLC.IA)\nAplique quando relevante (regras de negócio, conceitos ensinados, aprendizados de documentos). Itens "conflicting"/"hypothesis" não são certezas.\n${lines.join("\n")}\n\n`;
   } catch { return ""; }
 }
 
@@ -284,56 +284,15 @@ class PausedError extends Error {
   }
 }
 
-function systemPrompt(context: string, resumeNote?: string, nexusWorkflow?: string, knowledgeContext?: string, developmentMode = false, cognitiveContext?: string, modePrompt = "") {
-  const writesAllowed = !/MODO CHAT|MODO PLANEJAR \(arquiteto/.test(modePrompt);
-  const nexusInstructions = nexusWorkflow ? `\n\n## WLC.IA — INTELIGÊNCIA CENTRAL\nVocê é WLC.IA, a inteligência integrada de desenvolvimento. Use o pedido atual, contexto e ferramentas reais para decidir internamente a abordagem: compreender e analisar, investigar e depurar, planejar arquitetura, revisar segurança, ou implementar quando o usuário solicitar explicitamente. Essas capacidades são internas e não devem ser apresentadas como opções ou workflows ao usuário.\n- Em repositórios vinculados, chame analyze_repository no início de qualquer tarefa de código antes de planejar.\n- Leia os arquivos relevantes antes de concluir ou alterar.\n- Para pedidos de implementação, faça alterações pequenas e coerentes, verifique cada gravação e informe os caminhos modificados.\n- Para análises e revisões, apresente evidências e não altere arquivos sem pedido explícito.\n- Priorize segurança, compatibilidade e prevenção de regressões.\n- Explique limites com honestidade: não execute código neste ambiente, salvo evidências de CI. Não invente resultados.` : "";
-  return `Você é WLC.IA, uma inteligência conversacional e agente capaz de compreender pedidos, responder com conhecimento geral, analisar, planejar, pesquisar quando ferramentas disponíveis, executar ações permitidas e avaliar resultados. Sua base inicial inclui matemática, Física introdutória e desenvolvimento web. Use a ferramenta calculate_expression para validar contas numéricas quando disponível; explique fórmulas, unidades e etapas, e não invente resultados de cálculo. Você está integrada ao Studio e, quando houver repositório vinculado, também pode trabalhar nele usando ferramentas reais.
-
-${cognitiveContext ? `${cognitiveContext}\n\n` : ""}${SELF_HEALING_PROTOCOL}
+function systemPrompt(context: string, resumeNote?: string, _nexusWorkflow?: string, knowledgeContext?: string, _developmentMode = false, _cognitiveContext?: string, modePrompt = "") {
+  return `Você é a WLC.IA, uma IA livre e inteligente. Responda em português, de forma natural e direta.
 
 ${modePrompt}
 
-## Regras gerais
-- Se uma gravação falhar (conflito de versão, 409/422, "sha"), NUNCA use delete_file para "recriar" o arquivo: leia o arquivo de novo com read_file e sobrescreva com write_file ou aplique patch_file.
-- Em sistemas completos (PDV, gestão, painéis, apps mobile), entregue a solução de ponta a ponta e funcional — telas responsivas, cadastro, fluxo principal, persistência e relatórios — em vez de esqueletos ou placeholders.
-- Durante a execução, comunique progresso em etapas curtas e concretas: o que está sendo inspecionado, operação realizada, resultado e próxima etapa. Não invente atividade em tempo real; relate somente operações confirmadas pelas ferramentas.
-- Ao concluir, entregue relatório com arquivos alterados, commits, validações executadas, resultados, limitações e pendências.
-
-## Núcleo cognitivo e comportamento
-- Determine a intenção e o contexto da mensagem. Não force um workflow: responder, esclarecer, analisar, planejar, pesquisar, agir, avaliar ou replanejar são decisões contextuais.
-- Para pedidos simples, responda diretamente; para tarefas complexas, decomponha em etapas úteis e escolha a próxima ação pelo resultado observado.
-- Use ferramentas somente quando agregarem valor. Leia resultados, trate erros e nunca alegue ação, acesso, teste ou sucesso sem evidência.
-- Mantenha contexto conversacional; evite pedir novamente informações já disponíveis. Pergunte apenas quando a informação ausente for essencial.
-- Use conhecimento recuperado como referência, não como autoridade infalível. Para matemática e Física, exponha os dados, fórmula, substituição, unidade e verificação final de forma pedagógica; para pedidos de desenvolvimento de sites, considere estrutura, UX, responsividade, acessibilidade, SEO, segurança e testes. Se houver conflito, prefira evidências específicas e atuais, explique incerteza e verifique quando possível.
-- Você pode fornecer uma síntese breve de abordagem e conclusão, mas não revele cadeia de pensamento privada.
-- Se não souber ou não tiver capacidade/ferramenta, admita com clareza; não invente. A capacidade ainda não disponível pode ser descrita como em desenvolvimento.
-- Respeite escopo e permissões; peça aprovação para ações destrutivas ou de alto impacto.
-
-${developmentMode && writesAllowed ? `
-## Modo de desenvolvimento — padrão de engenharia profissional
-- Atue como engenheiro de software sênior full-stack: descubra requisitos, arquitetura existente, convenções, dependências e limites antes de propor mudanças.
-- Para tarefas complexas, crie plano curto com entregáveis e critérios de aceite; implemente uma solução ponta a ponta, não apenas snippets, placeholders ou telas sem funcionalidade.
-- Leia arquivos relevantes antes de alterar; preserve compatibilidade, dados, APIs e estilos existentes. Faça mudanças pequenas, coerentes e focadas.
-- HTML: semântica, acessibilidade e SEO; CSS: responsivo/mobile-first, tokens e estados; JS/TS: strict types, validação runtime e tratamento de erros; React: componentes e estado previsíveis.
-- Backend/API: contratos, autorização server-side, validação, idempotência, rate limits, logs e erros seguros. Dados: schema, constraints, migrations, índices e transações. Nunca exponha credenciais nem coloque secrets no cliente.
-- Scripts: parâmetros validados, dry-run quando destrutivo, logs, limites, timeout, falhas claras e repetibilidade.
-- Antes de entregar, revisar diff e imports, checar erros óbvios, acessibilidade, responsividade, estados loading/empty/error, segurança e critérios de aceite. Executar validações disponíveis e registrar resultados reais.
-- write_file grava arquivo inteiro e faz commit; confira "verified" no resultado. Este ambiente NÃO executa código local: use check_ci quando CI existir; sem CI, informe honestamente o que não foi executado.
-- Nunca declare algo pronto sem evidência. Remoções exigem aprovação (delete_file apenas cria pedido). Registre decisões relevantes com save_memory e tarefas com update_task.
-- Sites estáticos são publicados como um único documento: use navegação SPA por hash (#rota) em um index.html; nunca link para outros .html. Todo link e botão deve levar a uma ação real.
-- Persistência: nunca pare na metade. Execute TODAS as etapas do plano até o site funcionar; só escreva o resumo final quando tudo estiver gravado.
-- Estilo moderno sem build: Tailwind via CDN ou variáveis CSS, Google Fonts via <link>, ícones Lucide/SVG; layout mobile-first que funcione em Desktop e Mobile.
-- Dados reais: para pedidos, cadastros, leads e listas use o banco isolado do site (window.wlcDb.collection('nome').create/list), com tratamento de erro e estado de carregamento.
-- Para projetos novos, construa passo a passo (design system → navegação → telas → dados persistidos → mobile → revisão de links) e explique cada etapa em linguagem simples.
-- Não repita operações concluídas nem sobrescreva alterações externas sem analisar. Responda em português com resumo, arquivos, validações, limitações e commits.
-${GENESIS_PROMPT}` : ""}${resumeNote ? `
-## RETOMADA DE CHECKPOINT
-${resumeNote}
-` : ""}${nexusInstructions}${knowledgeContext ? `
-
-## WLC.IA — BASE DE CONHECIMENTO RECUPERADA
-Use os conceitos abaixo como contexto relevante para esta solicitação; não os cite como fonte externa nem trate como infalíveis.
-${knowledgeContext}` : ""}
+## Ferramentas
+- Use as ferramentas reais quando precisar do repositório. Nunca invente commits, testes ou resultados.
+- Para editar arquivo existente, leia com read_file antes. Se uma gravação falhar por SHA/409/422, releia e tente de novo.
+${resumeNote ? `\n## Retomada\n${resumeNote}\n` : ""}${knowledgeContext ? `\n## Conhecimento ensinado pelo usuário\n${knowledgeContext}\n` : ""}
 ${context}`;
 }
 
@@ -1110,103 +1069,11 @@ export async function runAgent(
     };
 
     // ---- main loop
-    const retrievedKnowledge = formatWlcKnowledgeContext(retrieveWlcKnowledge(latestUserQuery, 6));
-    const physicsContext = formatPhysicsFormulaContext(retrievePhysicsFormulas(latestUserQuery, 5));
-    const specialistAcademyContext = buildSpecialistAcademyContext(latestUserQuery, "principal");
-    const engineeringQualityContext = buildEngineeringQualityContext();
-    const designIntelligenceContext = buildWlcDesignContext();
-    const professionalEngineeringContext = buildWlcProfessionalEngineeringContext(latestUserQuery);
-    // Cognitive Core Evolution 0.13 — Adaptive Knowledge + Technology Radar
-    const adaptiveKnowledgeCtx = formatAdaptiveKnowledgeContext(retrieveAdaptiveKnowledge(latestUserQuery, 4));
-    const techRadarHits = findTechnologies(latestUserQuery, 4);
-    const techRadarCtx = formatTechnologyRadarContext(techRadarHits);
-    // Creative Engineering + Design DNA (development-oriented requests only)
-    let creativeEngineeringCtx = "";
-    let designDnaCtx = "";
-    let projectCreationCtx = "";
-    let creationBlueprint: CreationBlueprint | undefined;
-    if (shouldRunCreativePlanning(latestUserQuery) || isCreationRequest(latestUserQuery)) {
-      // Creation Intelligence v2: blueprint de domínio (entidades, invariantes, estados, escopo em camadas, fases com portões).
-      creationBlueprint = analyzeCreation(latestUserQuery);
-      projectCreationCtx = formatCreationBlueprintContext(creationBlueprint);
-      wlcLogger.info("creation-intelligence-v2", "blueprint_built", {
-        chat_id: chat.id,
-        primary: creationBlueprint.primary,
-        secondary: creationBlueprint.secondary,
-        tier: creationBlueprint.tier,
-        complexity: creationBlueprint.complexityScore,
-        confidence: creationBlueprint.confidence,
-      });
-      const creativePlan = generateCreativePlan({
-        objective: latestUserQuery.slice(0, 500),
-        complexity: /complexo|enterprise|saas|dashboard|multi/.test(latestUserQuery.toLocaleLowerCase("pt-BR")) ? "high" : "medium",
-      });
-      creativeEngineeringCtx = formatCreativePlanContext(creativePlan);
-      const dna = generateDesignDNA({
-        objective: latestUserQuery.slice(0, 300),
-        desiredIdentity: creativePlan.selected.personality,
-        complexity: creativePlan.brief.complexity,
-      });
-      designDnaCtx = formatDesignDNAContext(dna);
-    }
-    const combinedKnowledge = [
-      retrievedKnowledge,
-      adaptiveKnowledgeCtx,
-      specialistAcademyContext,
-      engineeringQualityContext,
-      designIntelligenceContext,
-      professionalEngineeringContext,
-      techRadarCtx,
-      projectCreationCtx,
-      creativeEngineeringCtx,
-      designDnaCtx,
-      physicsContext
-        ? `## Fórmulas de Física recuperadas
-Use as fórmulas apenas se suas condições de validade forem atendidas e explique símbolos/unidades.
-${physicsContext}`
-        : "",
-    ]
-      .filter(Boolean)
-      .join("\n\n");
-    const currentMessage = taskMessage || latestUserQuery;
-    const proDecision = assessProRequest(
-      currentMessage,
-      history.map((m) => ({
-        role: m.role,
-        content: typeof m.content === "string" ? m.content : "",
-      })),
-    );
-    wlcLogger.info("cognitive-orchestrator-pro", "request_assessed", summarizeProDecision(proDecision));
-
-    const intelligenceFrame = buildWlcIntelligenceFrame(currentMessage, history.map((m) => ({
-      role: m.role,
-      content: typeof m.content === "string" ? m.content : "",
-    })));
-    const cognitiveDecision = assessWlcRequest(currentMessage);
-    const advancedCognition = assessAdvancedCognition(currentMessage);
-    const socialDecision = assessSocialConversation(taskMessage || latestUserQuery, history.map((m) => ({ role: m.role, content: typeof m.content === "string" ? m.content : "" })));
-    const engineeringIntelligenceContext = formatEngineeringIntelligenceContext(currentMessage, history.map((m) => ({ role: m.role, content: typeof m.content === "string" ? m.content : "" })));
-    const cognitiveContext = [engineeringIntelligenceContext, formatProCognitiveContext(proDecision), formatWlcIntelligenceContext(intelligenceFrame), formatWlcCognitiveContext(cognitiveDecision), formatAdvancedCognitiveContext(advancedCognition), formatSocialCognitionContext(socialDecision), formatEngineeringContext(currentMessage, cognitiveDecision), formatAutonomousEngineeringContext(currentMessage), formatAutonomousDevelopmentContext(currentMessage), buildAutonomousIntelligenceContext(currentMessage)].filter(Boolean).join("\n\n");
-    wlcLogger.info("cognitive-engine", "request_assessed", {
-      chat_id: chat.id,
-      intent: cognitiveDecision.intent,
-      complexity: cognitiveDecision.complexity,
-      risk: cognitiveDecision.risk,
-      tools_recommended: cognitiveDecision.needsTools,
-      clarification_recommended: cognitiveDecision.needsClarification,
-      intelligence_mode: intelligenceFrame.mode,
-      conversation_continuity: intelligenceFrame.continuity,
-      intelligence_risk: intelligenceFrame.risk,
-      intelligence_confidence: intelligenceFrame.confidence,
-      cognitive_confidence: advancedCognition.confidence,
-      cognitive_strategy: advancedCognition.strategy,
-      human_review_recommended: advancedCognition.requiresHumanReview,
-      social_intent: socialDecision.intent,
-      social_tone: socialDecision.tone,
-      contextual_followup: socialDecision.shortContextualReply,
-    });
+    // Contexto enxuto: modo + projeto + conhecimento ensinado pelo usuário. Sem módulos de regras fixas.
+    const creationBlueprint: CreationBlueprint | undefined = undefined;
+    void creationBlueprint;
     const learnedKnowledge = await loadLearnedKnowledge(db, userId, taskMessage || latestUserQuery, mode);
-    const messages: ChatMsg[] = [{ role: "system", content: officialCatalogPrompt(taskMessage || latestUserQuery) + learnedKnowledge + systemPrompt(ctx.text, input.resumeNote, nexusWorkflow ?? undefined, combinedKnowledge, !!repo, cognitiveContext, modeSystemPrompt(mode, planApproved)) + modeInstruction(planApproved ? "build" : mode) + (mode === "chat" ? "" : buildCreationProtocol(planApproved ? "build" : mode, creationBlueprint)) }, ...history];
+    const messages: ChatMsg[] = [{ role: "system", content: systemPrompt(ctx.text, input.resumeNote, undefined, learnedKnowledge, !!repo, undefined, modeSystemPrompt(mode, planApproved)) }, ...history];
     await persistAgentEvent(input.resumedCheckpointId ? "execution_resumed" : "execution_started", "running",
       input.resumedCheckpointId ? "Execução retomada de checkpoint" : "Execução iniciada",
       { resumed_checkpoint_id: input.resumedCheckpointId ?? null, model: chat.model });

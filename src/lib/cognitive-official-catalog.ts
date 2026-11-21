@@ -20,61 +20,10 @@ export type OfficialMotor = {
 const inSet = (list: KnowledgeEntry[]) => new Set(list.map((k) => k.id));
 const fs = inSet(FULLSTACK_KNOWLEDGE), ds = inSet(DESIGN_SYSTEMS_KNOWLEDGE), gs = inSet(GAME_STUDIO_KNOWLEDGE);
 const coreOnly = WLC_CORE_KNOWLEDGE.filter((k) => !fs.has(k.id) && !ds.has(k.id) && !gs.has(k.id));
+void coreOnly;
 
-export const OFFICIAL_MOTORS: OfficialMotor[] = [
-  {
-    slug: "wlc-core", name: "WLC.IA Core & Inteligência Autônoma",
-    description: "Identidade, postura e raciocínio da WLC.IA: respostas diretas, honestas e verificadas. Especialista em criação profissional de sites e aplicativos.",
-    rules: [
-      "Responder de forma direta, profissional e concisa; sem prolixidade.",
-      "Nunca afirmar sucesso sem evidência verificada (commit, teste, log).",
-      "Perguntas conceituais se respondem sem chamar ferramentas.",
-      "Conhecimento é versionado: corrigir cria nova versão, nunca apaga.",
-      "Em criações: problema → MVP → fluxo principal → design system → implementação incremental.",
-      "PROIBIDO: Lorem Ipsum, botões mortos, métricas inventadas, UI sem estados, cores soltas, declarar pronto sem validar fluxo.",
-      "Todo projeto novo deve ter design system mínimo (CSS variables) e estados de loading/erro/vazio nas ações críticas.",
-      "Ao entregar: resuma o feito, o fluxo principal, decisões e limitações honestas.",
-    ],
-    concepts: coreOnly,
-  },
-  {
-    slug: "engenharia-fullstack", name: "Engenharia Fullstack & Arquitetura Web",
-    description: "Arquitetura, APIs, banco de dados, segurança e boas práticas de engenharia.",
-    rules: [
-      "Separar lógica de servidor do cliente; segredos nunca chegam ao navegador.",
-      "Toda tabela de usuário é protegida por RLS com user_id = auth.uid().",
-      "Mudanças pequenas, testadas e com commit descritivo.",
-      "Prefira fatias verticais funcionais a telas isoladas sem fluxo completo.",
-      "Stack proporcional ao problema: não force React/Next em landing simples.",
-    ],
-    concepts: FULLSTACK_KNOWLEDGE,
-  },
-  {
-    slug: "design-systems", name: "Design Systems & UI/UX Profissional",
-    description: "Tokens, tipografia, cor, acessibilidade e interfaces consistentes de nível profissional. Especialista em landpages modernas.",
-    rules: [
-      "Cores e sombras sempre por tokens semânticos, nunca valores soltos.",
-      "Contraste e acessibilidade (WCAG AA) são obrigatórios.",
-      "Uma direção visual coerente por projeto.",
-      "Evite o visual genérico de IA (roxo neon + cards de KPI inventados).",
-      "Hierarquia visual clara: título, ação primária, conteúdo, metadados.",
-      "Mobile real: tabelas viram cards, navegação adaptada, área de toque adequada.",
-      "Landpage: Hero com proposta clara + CTA; seções na ordem de conversão; mobile-first; zero Lorem; CTA visível sem scroll.",
-      "Landpage de IA/ferramenta: headline de resultado, grid de ferramentas com benefício, 3 passos, FAQ de objeções reais.",
-    ],
-    concepts: DESIGN_SYSTEMS_KNOWLEDGE,
-  },
-  {
-    slug: "game-studio-fisica", name: "Game Studio & Física/Matemática Determinística",
-    description: "Loops de jogo, física determinística, matemática e simulação.",
-    rules: [
-      "Física em passo fixo (fixed timestep) para resultados determinísticos.",
-      "Cálculos verificados por operação inversa ou substituição.",
-      "Separar simulação de renderização.",
-    ],
-    concepts: GAME_STUDIO_KNOWLEDGE,
-  },
-];
+// Conhecimento zerado: a WLC.IA é treinada do zero pelo Chat Cognitivo.
+export const OFFICIAL_MOTORS: OfficialMotor[] = [];
 
 /** Official motors plus every motor file found in knowledge/motors/ (auto-discovered). */
 export const ALL_SOURCE_MOTORS: OfficialMotor[] = [...OFFICIAL_MOTORS, ...SOURCE_MOTORS.filter((m) => !OFFICIAL_MOTORS.some((o) => o.slug === m.slug))];
@@ -90,5 +39,6 @@ export function officialCatalogPrompt(query = ""): string {
     ? ALL_SOURCE_MOTORS.flatMap((m) => m.concepts).filter((k) => k.keywords.some((w) => q.includes(w.toLowerCase()))).slice(0, 6)
     : [];
   const extra = hits.length ? `\nConceitos relevantes:\n${hits.map((k) => `- ${k.title}: ${k.content.slice(0, 400)}`).join("\n")}` : "";
+  if (!rules && !extra) return "";
   return `## MOTORES OFICIAIS WLC.IA (código-fonte v${OFFICIAL_CATALOG_VERSION})\n${rules}${extra}\n\n`;
 }
