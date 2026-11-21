@@ -1,0 +1,87 @@
+{
+  "name": "SaaS Landpages & Páginas de Alta Conversão",
+  "slug": "saas-landpage",
+  "description": "Estrutura, copy e UI de landing pages de SaaS e produtos digitais modernas, com foco em clareza de proposta de valor e conversão — não em visual genérico de template.",
+  "knowledge": [
+    {
+      "title": "Estrutura clássica de landpage que converte",
+      "kind": "method",
+      "category": "landing",
+      "keywords": ["landpage", "landing page", "saas", "estrutura", "seções", "conversão"],
+      "validation": "source_validated",
+      "content": "Estrutura eficaz: (1) Hero com proposta de valor clara + CTA principal. (2) Problema/dor que o produto resolve. (3) Como funciona (3 passos). (4) Benefícios/features com foco em resultado, não em botão. (5) Prova social (depoimentos, logos, números reais). (6) Preços ou CTA de trial. (7) FAQ. (8) CTA final. Cada seção deve responder uma objeção ou avançar a decisão."
+    },
+    {
+      "title": "Hero que não é genérico",
+      "kind": "rule",
+      "category": "landing",
+      "keywords": ["hero", "headline", "cta", "proposta de valor"],
+      "validation": "source_validated",
+      "content": "Headline = resultado ou transformação, não nome do produto. Subheadline explica para quem e como. CTA principal com verbo claro ('Começar grátis', 'Ver demonstração', 'Criar minha loja'). Evite 'Bem-vindo ao futuro do X' e ilustrações abstratas sem contexto. Se possível, mostre o produto (screenshot ou UI real) no hero."
+    },
+    {
+      "title": "Copy orientada a benefício e prova",
+      "kind": "method",
+      "category": "copy",
+      "keywords": ["copy", "benefício", "feature", "prova social", "depoimento"],
+      "validation": "source_validated",
+      "content": "Features viram benefícios: não 'Relatórios avançados', e sim 'Saiba quais produtos e canais dão mais lucro'. Depoimentos específicos (> genéricos). Números só se forem reais ou claramente ilustrativos. Tom: confiante e direto, sem hype vazio."
+    },
+    {
+      "title": "Seção de preços que reduz fricção",
+      "kind": "method",
+      "category": "pricing",
+      "keywords": ["preço", "pricing", "plano", "trial", "assinatura"],
+      "validation": "source_validated",
+      "content": "Planos com nomes claros, preço mensal/anual, lista de o que inclui, destaque no plano recomendado. CTA por plano. Se houver trial, diga duração e se pede cartão. Tabela comparativa só se houver diferença real entre planos. Evite 6 planos — 2 ou 3 bastam."
+    },
+    {
+      "title": "UI de landpage moderna (não template 2019)",
+      "kind": "rule",
+      "category": "ui",
+      "keywords": ["ui landing", "moderno", "visual", "layout"],
+      "validation": "source_validated",
+      "content": "Layout limpo, boa tipografia, contraste forte no CTA, espaçamento generoso, imagens/UI reais do produto, dark ou light coerente com a marca. Evite carrossel de logos genéricos, stock photos de aperto de mão e seções 'Nossos valores' vazias. Animações sutis no scroll, sem atrapalhar."
+    },
+    {
+      "title": "Landpage de produto omni/PDV: o que destacar",
+      "kind": "method",
+      "category": "product",
+      "keywords": ["pdv landpage", "loja virtual", "omni", "pitch"],
+      "validation": "source_validated",
+      "content": "Proposta forte: 'Venda no balcão e na internet com o mesmo estoque e os mesmos relatórios'. Destaque: PDV rápido, loja virtual embutida, pedidos unificados, retirada na loja, visão de ROI por canal. Mostre telas reais (caixa + vitrine + dashboard). CTA: 'Ver demonstração' ou 'Começar com minha loja'."
+    },
+    {
+      "title": "SEO e performance básicos de landpage",
+      "kind": "rule",
+      "category": "seo",
+      "keywords": ["seo", "performance", "meta", "og", "lighthouse"],
+      "validation": "source_validated",
+      "content": "Title e meta description únicos, H1 único, imagens otimizadas, LCP razoável, mobile-first. Open Graph para compartilhamento. Não precisa de blog completo no MVP, mas a página principal deve ser indexável e rápida."
+    },
+    {
+      "title": "Formulários e captura de lead",
+      "kind": "method",
+      "category": "conversion",
+      "keywords": ["lead", "formulário", "captura", "trial", "demo"],
+      "validation": "source_validated",
+      "content": "Peça o mínimo: e-mail + nome (e senha se for trial com conta). Explique o que acontece depois do envio. Feedback de sucesso claro. Em demo, pode simular o envio e mostrar mensagem de confirmação — mas estruture para plugar e-mail real depois."
+    },
+    {
+      "title": "Landpage ≠ app: separe os contextos",
+      "kind": "rule",
+      "category": "architecture",
+      "keywords": ["landpage", "app", "marketing site", "produto"],
+      "validation": "source_validated",
+      "content": "Site de marketing/landpage pode ser estático ou SSR. O app (PDV, admin, loja logada) é outra superfície. Não misture navegação de marketing com sidebar de operador. CTAs da landpage levam para signup/login ou demo do produto."
+    },
+    {
+      "title": "Checklist de landpage profissional",
+      "kind": "method",
+      "category": "quality",
+      "keywords": ["checklist", "landpage", "conversão", "qualidade"],
+      "validation": "source_validated",
+      "content": "Antes de entregar: proposta de valor clara em 5 segundos? CTA visível sem scroll? Mobile legível e clicável? Prova ou benefício concreto? Preços ou próximo passo óbvio? Sem Lorem Ipsum? Performance aceitável? Se for de um produto omni/PDV, fica claro o diferencial unificado?"
+    }
+  ]
+}

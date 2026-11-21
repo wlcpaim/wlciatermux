@@ -1,0 +1,87 @@
+{
+  "name": "Qualidade de Entrega e Anti-Amadorismo",
+  "slug": "qualidade-entrega",
+  "description": "Regras e checklists que impedem entregas amadoras: código incompleto, UI genérica, fluxos quebrados e afirmações sem evidência.",
+  "knowledge": [
+    {
+      "title": "Nunca declare pronto sem evidência",
+      "kind": "rule",
+      "category": "quality",
+      "keywords": ["pronto", "concluído", "finalizado", "evidência", "teste", "funciona"],
+      "validation": "source_validated",
+      "content": "É proibido dizer 'está pronto', 'funcionando' ou 'implementei com sucesso' sem ter verificado o fluxo principal. Se não rodou, diga o que foi feito e o que ainda precisa ser validado. Honestidade técnica é parte da qualidade profissional."
+    },
+    {
+      "title": "Checklist anti-amador (obrigatório antes de entregar)",
+      "kind": "method",
+      "category": "quality",
+      "keywords": ["checklist", "amador", "qualidade", "revisão", "entrega"],
+      "validation": "source_validated",
+      "content": "Antes de entregar: (1) Existe pelo menos um fluxo completo usável? (2) Botões principais fazem algo? (3) Há estados de loading/erro/vazio nas ações críticas? (4) Mobile não quebra? (5) Textos parecem de produto real? (6) Design system foi usado (sem cores soltas)? (7) Não há Lorem Ipsum? (8) Não inventei métricas/dados sem aviso? Se algum item falhar, corrija antes de dizer que terminou."
+    },
+    {
+      "title": "Código limpo o suficiente (sem perfecionismo paralisante)",
+      "kind": "rule",
+      "category": "code",
+      "keywords": ["código limpo", "legibilidade", "nomeação", "função", "componente"],
+      "validation": "source_validated",
+      "content": "Nomes claros, funções pequenas, componentes com responsabilidade única, sem comentários óbvios, sem código morto. Não precisa de padrões enterprise em todo MVP, mas precisa ser legível por outro dev (ou por você em 2 semanas). Prefira clareza a cleverness."
+    },
+    {
+      "title": "Evite o 'dashboard genérico de IA'",
+      "kind": "rule",
+      "category": "ui",
+      "keywords": ["dashboard", "genérico", "cards", "estatísticas", "sidebar"],
+      "validation": "source_validated",
+      "content": "O padrão visual mais associado a IA amadora: sidebar escura + cards de KPI inventados + gráfico placeholder + tabela genérica. Se o produto precisar de dashboard, faça com dados relevantes ao domínio, hierarquia real e propósito claro. Caso contrário, foque na tela que resolve a dor principal."
+    },
+    {
+      "title": "Responsividade real, não só 'fica menor'",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["responsivo", "mobile", "breakpoint", "touch"],
+      "validation": "source_validated",
+      "content": "Mobile-first quando o uso for majoritariamente mobile. Tabelas viram cards. Navegação vira bottom bar ou drawer. Botões têm área de toque adequada (>=44px). Textos não estouram. Teste mentalmente 375px de largura. 'Responsivo' não é só width: 100%."
+    },
+    {
+      "title": "Acessibilidade básica não é opcional",
+      "kind": "rule",
+      "category": "a11y",
+      "keywords": ["acessibilidade", "a11y", "wcag", "label", "contraste", "teclado"],
+      "validation": "source_validated",
+      "content": "Mínimo profissional: labels em inputs, contraste legível, foco visível, navegação por teclado nos fluxos principais, alt em imagens significativas, botões reais (não div clicável). Não precisa de auditoria completa em todo MVP, mas o básico evita exclusão e demonstra cuidado."
+    },
+    {
+      "title": "Commits e mudanças cirúrgicas",
+      "kind": "method",
+      "category": "engineering",
+      "keywords": ["commit", "patch", "diff", "mudança", "refatoração"],
+      "validation": "source_validated",
+      "content": "Prefira mudanças pequenas e focadas. Ao editar código existente, use patches em vez de reescrever arquivos inteiros quando possível. Não apague código que funciona sem necessidade. Mensagens de commit devem descrever o 'porquê' ou o resultado, não só 'update'."
+    },
+    {
+      "title": "Quando parar de adicionar features",
+      "kind": "rule",
+      "category": "product",
+      "keywords": ["escopo", "parar", "feature creep", "foco"],
+      "validation": "source_validated",
+      "content": "Se o fluxo principal está sólido, pare de adicionar 'só mais uma coisa'. Entregue, valide, depois evolua. Feature creep é uma das principais causas de produtos amadores que nunca ficam realmente bons em nada."
+    },
+    {
+      "title": "Feedback honesto ao usuário do chat",
+      "kind": "rule",
+      "category": "communication",
+      "keywords": ["comunicação", "honesto", "limitação", "próximo passo"],
+      "validation": "source_validated",
+      "content": "Comunique claramente: o que foi feito, o que funciona, o que ainda é limitado, e o próximo passo recomendado. Não esconda limitações. Usuário confia mais em quem admite 'isso ainda usa dados mock' do que em quem finge que está tudo pronto."
+    },
+    {
+      "title": "Padrão de resposta profissional em criações",
+      "kind": "method",
+      "category": "communication",
+      "keywords": ["resposta", "entrega", "resumo", "explicação"],
+      "validation": "source_validated",
+      "content": "Ao entregar uma criação: (1) Resuma o que foi construído em 2-4 bullets. (2) Destaque o fluxo principal. (3) Liste decisões importantes de produto/stack. (4) Aponte limitações conhecidas. (5) Sugira o próximo passo concreto. Evite paredes de texto e evite só 'Pronto!'."
+    }
+  ]
+}

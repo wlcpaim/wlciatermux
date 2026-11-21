@@ -1,0 +1,87 @@
+{
+  "name": "Arquitetura Moderna de Aplicações",
+  "slug": "arquitetura-moderna",
+  "description": "Padrões arquiteturais atuais para sites e apps profissionais: organização de código, estado, dados e escalabilidade sem over-engineering.",
+  "knowledge": [
+    {
+      "title": "Arquitetura por features (não por tipo de arquivo)",
+      "kind": "architecture",
+      "category": "architecture",
+      "keywords": ["feature", "arquitetura", "organização", "pastas", "módulo"],
+      "validation": "source_validated",
+      "content": "Organize por domínio/feature quando o app cresce: /features/auth, /features/projects, /features/billing. Dentro de cada feature: components, hooks, api, types. Mantenha /components/ui e /lib compartilhados. Isso evita a pasta components/ virar um depósito caótico e facilita manutenção."
+    },
+    {
+      "title": "Camadas claras: UI → Domain → Data",
+      "kind": "architecture",
+      "category": "architecture",
+      "keywords": ["camadas", "clean architecture", "separação", "domain", "ui"],
+      "validation": "source_validated",
+      "content": "UI não deve conhecer detalhes de banco ou HTTP. Crie funções de serviço/API claras. Regras de negócio ficam fora dos componentes React. Componentes devem ser majoritariamente apresentação + orquestração de estado local. Isso permite trocar backend ou testar lógica sem montar a árvore de componentes."
+    },
+    {
+      "title": "Estado: local primeiro, global só quando necessário",
+      "kind": "rule",
+      "category": "state",
+      "keywords": ["estado", "state", "zustand", "context", "redux", "server state"],
+      "validation": "source_validated",
+      "content": "Prefira estado local (useState/useReducer) e URL state (search params). Para estado de servidor (dados da API): React Query / TanStack Query. Estado global do cliente só para sessão, tema, preferências e poucos dados realmente transversais. Evite Context API para dados que mudam com frequência."
+    },
+    {
+      "title": "Contratos de API e tipagem ponta a ponta",
+      "kind": "method",
+      "category": "api",
+      "keywords": ["api", "contrato", "typescript", "zod", "validação"],
+      "validation": "source_validated",
+      "content": "Defina tipos/interfaces claros para requests e responses. Valide entrada com Zod (ou equivalente) no servidor. Padronize formato de erro. No frontend, trate loading/error/success de forma consistente. Nunca confie que o backend sempre devolverá o shape esperado — valide ou trate defensivamente."
+    },
+    {
+      "title": "Autenticação e autorização profissionais",
+      "kind": "rule",
+      "category": "security",
+      "keywords": ["auth", "autenticação", "autorização", "jwt", "sessão", "rbac"],
+      "validation": "source_validated",
+      "content": "Autenticação identifica o usuário. Autorização decide o que ele pode fazer (sempre no servidor). Proteja rotas e dados no backend. No frontend, esconda UI de ações não permitidas, mas nunca confie só nisso. Prefira sessões httpOnly ou tokens bem gerenciados. Multi-tenant exige filtro por organização em toda query."
+    },
+    {
+      "title": "Quando e como usar Server Components / SSR / SPA",
+      "kind": "rule",
+      "category": "architecture",
+      "keywords": ["ssr", "spa", "server components", "next", "rsc"],
+      "validation": "source_validated",
+      "content": "Landing e conteúdo público: SSR/SSG para SEO e performance. Dashboards autenticados: SPA ou Server Components com cache cuidadoso. Interatividade pesada: Client Components. Não force Server Components em tudo. Escolha o modelo que resolve o caso de uso com menos complexidade."
+    },
+    {
+      "title": "Tratamento de erros e resiliência",
+      "kind": "method",
+      "category": "reliability",
+      "keywords": ["erro", "error boundary", "retry", "resiliência", "falha"],
+      "validation": "source_validated",
+      "content": "Tenha Error Boundaries em React. APIs devem retornar erros estruturados. No cliente: retry com backoff em falhas de rede, mensagens humanas, e fallback UI. Logue erros com contexto suficiente (sem dados sensíveis). Nunca engula erros silenciosamente."
+    },
+    {
+      "title": "Performance como requisito, não polish final",
+      "kind": "rule",
+      "category": "performance",
+      "keywords": ["performance", "lighthouse", "bundle", "lazy", "otimização"],
+      "validation": "source_validated",
+      "content": "Code-split rotas e componentes pesados. Otimize imagens. Evite re-renders desnecessários. Meça antes de otimizar prematuramente, mas não ignore sinais óbvios (bundle gigante, listas sem virtualização, imagens enormes). Core Web Vitals importam em produtos reais."
+    },
+    {
+      "title": "Testes com ROI: o que realmente vale testar",
+      "kind": "method",
+      "category": "testing",
+      "keywords": ["teste", "test", "vitest", "testing library", "e2e"],
+      "validation": "source_validated",
+      "content": "Priorize: (1) regras de negócio críticas, (2) fluxos principais de usuário, (3) utilitários puros. Evite testar detalhes de implementação de componentes simples. Em MVPs, testes de integração dos caminhos felizes + validação manual podem ser suficientes. Não prometa cobertura que não existe."
+    },
+    {
+      "title": "Evite over-engineering no início",
+      "kind": "rule",
+      "category": "architecture",
+      "keywords": ["over-engineering", "simples", "mvp", "complexidade", "yagni"],
+      "validation": "source_validated",
+      "content": "Não comece com microserviços, event sourcing, CQRS ou limpa arquitetura completa em um MVP. Comece simples, com limites claros, e evolua quando a dor aparecer. Arquitetura boa é a que permite mudança com custo razoável, não a mais sofisticada no dia 1."
+    }
+  ]
+}

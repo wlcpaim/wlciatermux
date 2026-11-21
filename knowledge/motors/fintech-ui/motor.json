@@ -1,0 +1,87 @@
+{
+  "name": "UI Fintech & Estética Financeira Moderna",
+  "slug": "fintech-ui",
+  "description": "Visual e padrões de interface de produtos financeiros e comerciais de alto nível: confiança, clareza numérica, dark mode sofisticado e sensação de produto real de mercado.",
+  "knowledge": [
+    {
+      "title": "DNA visual fintech (o que passa confiança)",
+      "kind": "rule",
+      "category": "design",
+      "keywords": ["fintech", "visual", "banco", "financeiro", "confiança", "estética"],
+      "validation": "source_validated",
+      "content": "Fintech de qualidade transmite confiança: tipografia limpa e números tabulares, hierarquia clara de valores monetários, poucos elementos decorativos, muito espaço em branco (ou dark sofisticado), acentos de cor pontuais (não gritaria). Evite neon excessivo, gradientes agressivos e cards 'gamer'. Prefira sobriedade premium: fundos profundos, bordas sutis, elevação discreta."
+    },
+    {
+      "title": "Paleta e tokens para produtos financeiros/comerciais",
+      "kind": "method",
+      "category": "design",
+      "keywords": ["cores", "paleta", "tokens", "dark", "fintech", "tema"],
+      "validation": "source_validated",
+      "content": "Base dark recomendada: bg #0B0F14 ou #0F1419, surface #151B23, surface-elevated #1C2430, border rgba(255,255,255,0.06), text #E8EEF5, text-muted #8B9BB0. Primária: azul confiança (#3B82F6 / #2563EB) ou verde dinheiro sóbrio (#10B981). Sucesso/erro/alerta só para status. Valores monetários com peso maior e cor que destaque variação positiva/negativa quando fizer sentido."
+    },
+    {
+      "title": "Números e valores monetários profissionais",
+      "kind": "rule",
+      "category": "ui",
+      "keywords": ["moeda", "valor", "número", "BRL", "formatação", "tabular"],
+      "validation": "source_validated",
+      "content": "Sempre formate moeda com Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}). Use font-variant-numeric: tabular-nums para alinhamento. Destaque o valor principal (total da venda, saldo, ROI) com tamanho e peso maiores. Variações percentuais com +/− e cor semântica. Nunca deixe número 'solto' sem contexto (R$ 1.250,00 de quê?)."
+    },
+    {
+      "title": "Cards e métricas que não parecem genéricos",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["card", "kpi", "métrica", "dashboard", "stat"],
+      "validation": "source_validated",
+      "content": "KPI card bom: label clara, valor principal grande, contexto (vs período anterior ou meta), e só isso. Evite 8 cards iguais com ícones genéricos. Em PDV/comércio priorize: vendas do dia, ticket médio, pedidos online abertos, estoque crítico. Se não tiver dado real, use seed realista e marque como demonstração — nunca invente crescimento de 347%."
+    },
+    {
+      "title": "Tabelas financeiras e listagens densas",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["tabela", "lista", "extrato", "lançamento", "transação"],
+      "validation": "source_validated",
+      "content": "Extratos e listagens de vendas: densidade controlada, colunas alinhadas (valores à direita), status com badge discreto, filtros por período/status/método, busca. Em mobile, transforme em lista de cards com as infos essenciais. Hover sutil em desktop. Ações por linha (ver detalhes, reimprimir, estornar) acessíveis sem poluir."
+    },
+    {
+      "title": "Formulários de valor e pagamento",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["formulário", "pagamento", "valor", "input money", "máscara"],
+      "validation": "source_validated",
+      "content": "Inputs de dinheiro devem facilitar digitação (máscara ou parse inteligente). Mostre o total em destaque durante o pagamento. Em pagamento misto, deixe claro quanto falta distribuir. Botão de confirmar só habilita quando a soma dos pagamentos fecha com o total. Feedback imediato de erro (valor inválido, falta completar)."
+    },
+    {
+      "title": "Empty states e onboarding no contexto comercial",
+      "kind": "rule",
+      "category": "ux",
+      "keywords": ["empty", "onboarding", "primeira venda", "sem dados"],
+      "validation": "source_validated",
+      "content": "Sem vendas ainda: oriente a fazer a primeira venda ou importar produtos. Sem produtos: CTA claro para cadastrar. Sem sessão de caixa: oriente a abrir o caixa. Empty state bom reduz abandono e ensina o produto. Evite tela em branco com 'Nenhum registro encontrado'."
+    },
+    {
+      "title": "Componentes típicos de produto fintech/comercial",
+      "kind": "concept",
+      "category": "ui",
+      "keywords": ["componente", "badge", "status", "timeline", "sparkline"],
+      "validation": "source_validated",
+      "content": "Use: badges de status (pago, pendente, cancelado, enviado), timeline de pedido, sparkline discreto para tendência, progress de meta, avatares/iniciais de cliente, chips de filtro. Mantenha consistência de raio, sombra e espaçamento. Menos componentes diferentes = mais profissional."
+    },
+    {
+      "title": "Dark mode fintech bem executado",
+      "kind": "rule",
+      "category": "design",
+      "keywords": ["dark mode", "modo escuro", "tema escuro"],
+      "validation": "source_validated",
+      "content": "Dark fintech usa camadas de superfície (não fundo cinza chapado). Bordas quase invisíveis, texto com contraste real, acentos pontuais. Evite branco puro em texto (#fff cansa); prefira off-white. Teste legibilidade de valores monetários e tabelas densas — é aí que dark mode ruim falha."
+    },
+    {
+      "title": "O que NÃO fazer em UI financeira/comercial",
+      "kind": "rule",
+      "category": "anti-pattern",
+      "keywords": ["anti-pattern", "genérico", "ruim", "amador"],
+      "validation": "source_validated",
+      "content": "Evite: gradiente roxo em tudo, ícones coloridos demais, cards com sombra pesada, tipografia display em dados, percentuais inventados, gráficos sem eixo legível, botões com labels vagas, excesso de animação. Produto financeiro/comercial vende confiança — o visual precisa parecer estável e adulto."
+    }
+  ]
+}

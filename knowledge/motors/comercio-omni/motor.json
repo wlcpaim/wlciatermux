@@ -1,0 +1,87 @@
+{
+  "name": "Comércio Omni (PDV + Loja Virtual Unificada)",
+  "slug": "comercio-omni",
+  "description": "Arquitetura e produto de comércio unificado: venda presencial e online no mesmo sistema, estoque único, pedidos, retirada na loja e visão consolidada — a inovação que faz sentido.",
+  "knowledge": [
+    {
+      "title": "Visão do produto: um comércio, dois canais",
+      "kind": "concept",
+      "category": "product",
+      "keywords": ["omni", "omnichannel", "pdv", "loja virtual", "unificado", "tudo em um", "presencial e online"],
+      "validation": "source_validated",
+      "content": "A inovação que faz sentido: o lojista opera UM sistema. O mesmo catálogo e estoque servem o caixa físico e a loja virtual. Pedido feito online pode ser retirado na loja (click & collect). Venda presencial e online entram nos mesmos relatórios. Não são dois sistemas colados — é um núcleo comercial com duas frentes de venda."
+    },
+    {
+      "title": "Arquitetura do núcleo comercial unificado",
+      "kind": "architecture",
+      "category": "architecture",
+      "keywords": ["arquitetura", "catálogo", "estoque", "pedido", "venda", "núcleo"],
+      "validation": "source_validated",
+      "content": "Núcleo compartilhado: Catalog (products, categories, prices), Inventory (stock por produto, movimentações), Customers, Orders/Sales (com canal: pos | online), Payments. Frente PDV: UI rápida de caixa + sessão de caixa. Frente Loja: vitrine, carrinho, checkout, área do cliente. Admin: produtos, estoque, pedidos, relatórios, configurações. Um banco, uma verdade de estoque."
+    },
+    {
+      "title": "Estoques e canais: regras claras",
+      "kind": "rule",
+      "category": "inventory",
+      "keywords": ["estoque compartilhado", "canal", "reserva", "disponibilidade"],
+      "validation": "source_validated",
+      "content": "Estoque único: toda venda (PDV ou online) debita o mesmo saldo. No checkout online, considere reserva temporária para evitar overselling. No PDV, valide estoque na finalização. Exiba disponibilidade na vitrine. Se houver múltiplos depósitos/lojas no futuro, modele location — mas no MVP um estoque global já resolve a maioria dos casos."
+    },
+    {
+      "title": "Pedidos online e fulfillment",
+      "kind": "method",
+      "category": "orders",
+      "keywords": ["pedido", "status", "fulfillment", "envio", "retirada", "click and collect"],
+      "validation": "source_validated",
+      "content": "Status típicos: pending_payment → paid → packing → shipped | ready_for_pickup → delivered | picked_up → cancelled. Cada transição com timestamp. No PDV, o operador pode marcar 'pronto para retirada' e confirmar a entrega ao cliente. Notificações (mesmo que mock) melhoram a experiência. Histórico do pedido visível para o cliente e para o lojista."
+    },
+    {
+      "title": "Jornada click & collect (retirada na loja)",
+      "kind": "method",
+      "category": "omni",
+      "keywords": ["retirada", "click and collect", "pegar na loja", "pickup"],
+      "validation": "source_validated",
+      "content": "Cliente compra online → escolhe 'Retirar na loja' → paga → loja separa → status ready_for_pickup → cliente chega → operador confirma no PDV/admin → status picked_up. Isso conecta de verdade os dois canais e é um diferencial claro frente a 'só ter um e-commerce separado'."
+    },
+    {
+      "title": "Módulos do app 'tudo em um' que fazem sentido",
+      "kind": "architecture",
+      "category": "product",
+      "keywords": ["módulos", "tudo em um", "pdv", "loja", "funil", "relatórios", "app completo"],
+      "validation": "source_validated",
+      "content": "Módulos coerentes: (1) PDV / Frente de caixa. (2) Loja virtual (vitrine + checkout). (3) Catálogo e estoque. (4) Pedidos (online + visão unificada). (5) Clientes. (6) Relatórios e métricas (vendas, ticket, canais, produtos top). (7) Funil/pipeline se houver processo comercial. (8) Configurações (horários, métodos de pagamento, tema). Não junte CRM enterprise, RH e contabilidade num MVP — foque no comércio."
+    },
+    {
+      "title": "Navegação e IA do produto omni",
+      "kind": "method",
+      "category": "ux",
+      "keywords": ["navegação", "menu", "sidebar", "operador", "admin"],
+      "validation": "source_validated",
+      "content": "Separe contextos: modo Operador (PDV focado, pouca distração) e modo Gestão (admin completo). No mobile do lojista: pedidos, estoque baixo, vendas do dia. Na loja virtual (cliente): navegação de e-commerce clássica. Não misture UI de caixa com UI de vitrine no mesmo layout."
+    },
+    {
+      "title": "Relatórios consolidados (a mágica do unificado)",
+      "kind": "method",
+      "category": "reports",
+      "keywords": ["relatório consolidado", "online vs presencial", "canal", "visão unificada"],
+      "validation": "source_validated",
+      "content": "O valor do omni aparece nos números: vendas totais = online + presencial; participação por canal; produtos que vendem mais em cada canal; horários de pico; ticket médio comparado. Um gráfico simples de receita por canal já comunica a inovação melhor do que 20 features isoladas."
+    },
+    {
+      "title": "MVP omni: o que entregar primeiro",
+      "kind": "rule",
+      "category": "product",
+      "keywords": ["mvp omni", "priorização", "escopo", "primeira versão"],
+      "validation": "source_validated",
+      "content": "Ordem sugerida: (1) Catálogo + estoque. (2) PDV com venda completa e baixa de estoque. (3) Vitrine + carrinho + pedido online (mesmo estoque). (4) Lista de pedidos e status. (5) Relatório de vendas por canal. (6) Click & collect. Depois: clientes fiéis, promoções, múltiplos operadores, integrações. Um fluxo presencial + um fluxo online funcionando vale mais que 10 telas incompletas."
+    },
+    {
+      "title": "Inovação com pé no chão",
+      "kind": "rule",
+      "category": "product",
+      "keywords": ["inovação", "diferencial", "sentido", "não forçar"],
+      "validation": "source_validated",
+      "content": "Inovação boa neste domínio: estoque e pedidos verdadeiramente unificados, retirada na loja fluida, visão única de desempenho, PDV rápido com cara de produto moderno. Inovação ruim: forçar IA em tudo, blockchain de estoque, ou 15 módulos que nenhum lojista pediu. Construa o que reduz dor real do comércio local/digital."
+    }
+  ]
+}

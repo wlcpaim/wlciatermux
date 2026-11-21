@@ -1,0 +1,87 @@
+{
+  "name": "Funil de Vendas & Conversão",
+  "slug": "funil-vendas",
+  "description": "Modelagem e interfaces de funil de vendas, CRM leve, estágios de oportunidade e métricas de conversão para produtos comerciais e SaaS.",
+  "knowledge": [
+    {
+      "title": "Funil de vendas: estágios claros e acionáveis",
+      "kind": "concept",
+      "category": "sales",
+      "keywords": ["funil", "pipeline", "estágio", "oportunidade", "lead", "conversão"],
+      "validation": "source_validated",
+      "content": "Funil típico B2C/varejo omni: Visitante → Lead → Interesse → Carrinho/Pedido → Pago → Entregue/Retirado. B2B/SaaS: Lead → Qualificado → Proposta → Negociação → Fechado/Ganho ou Perdido. Cada estágio deve ter critério de entrada/saída. Evite 12 estágios que ninguém usa — 4 a 7 é o ideal."
+    },
+    {
+      "title": "Modelo de dados de oportunidade/pedido no funil",
+      "kind": "architecture",
+      "category": "data",
+      "keywords": ["oportunidade", "deal", "pedido", "lead", "stage", "valor"],
+      "validation": "source_validated",
+      "content": "Opportunity/Deal: id, contact/customer, stage, value, source, owner, createdAt, updatedAt, expectedClose?, lostReason?. Histórico de mudança de estágio (timeline). Em e-commerce o 'pedido' já carrega o funil de fulfillment. Em PDV+loja, unifique visão: pedido online e venda presencial como eventos de conversão."
+    },
+    {
+      "title": "Kanban de funil vs lista",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["kanban", "board", "colunas", "drag", "pipeline ui"],
+      "validation": "source_validated",
+      "content": "Kanban funciona bem para times comerciais (arrastar cards entre estágios). Lista/tabela funciona melhor para alto volume e filtros. Em mobile, prefira lista com filtro por estágio. Ao mudar estágio, registre timestamp e responsável. Mostre valor total por coluna (somatório)."
+    },
+    {
+      "title": "Métricas de funil que importam",
+      "kind": "method",
+      "category": "metrics",
+      "keywords": ["conversão", "taxa", "roi", "cac", "ticket", "métrica de funil"],
+      "validation": "source_validated",
+      "content": "Métricas úteis: taxa de conversão entre estágios, tempo médio em cada estágio, valor total no pipeline, taxa de fechamento, ticket médio, origem que mais converte. ROI só faz sentido com custo (ads, comissão, custo do produto). Nunca invente ROI — calcule a partir de dados existentes ou deixe claro que é simulação."
+    },
+    {
+      "title": "ROI e gráficos honestos",
+      "kind": "rule",
+      "category": "metrics",
+      "keywords": ["roi", "gráfico", "retorno", "investimento", "lucro"],
+      "validation": "source_validated",
+      "content": "ROI = (Receita - Custo) / Custo. Para calcular de verdade precisa de: receita da venda e custo (produto + aquisição + operação). Se o sistema não captura custo de aquisição, não mostre ROI de marketing como fato. Prefira: margem de contribuição, lucro bruto por período, e tendência de vendas. Gráficos com eixos legíveis, período selecionável e dados reais do sistema."
+    },
+    {
+      "title": "Origem e atribuição de vendas",
+      "kind": "method",
+      "category": "sales",
+      "keywords": ["origem", "source", "utm", "canal", "atribuição"],
+      "validation": "source_validated",
+      "content": "Registre a origem: loja física, Instagram, Google, indicação, campanha X. Em loja virtual, capture UTM quando possível. Relatórios por canal ajudam a decidir onde investir. Mesmo em MVP, um campo 'origem' no pedido/cliente já gera valor."
+    },
+    {
+      "title": "Automação leve de funil (sem over-engineering)",
+      "kind": "rule",
+      "category": "automation",
+      "keywords": ["automação", "lembrete", "follow-up", "notificação"],
+      "validation": "source_validated",
+      "content": "No MVP: lembretes manuais, status claros e filtros ('parados há X dias'). Depois: regras simples (se estágio = Proposta e 3 dias sem update → destacar). Evite motor de automação complexo no dia 1. O valor está em não perder oportunidade, não em ter Zapier embutido."
+    },
+    {
+      "title": "Funil integrado ao PDV e à loja",
+      "kind": "architecture",
+      "category": "omni",
+      "keywords": ["funil omni", "pdv", "loja", "pedido", "conversão unificada"],
+      "validation": "source_validated",
+      "content": "No comércio unificado: visita na loja virtual → carrinho → pedido → pagamento → separação → envio/retirada. No PDV: atendimento → venda → pagamento. Ambos alimentam as mesmas métricas de conversão e receita. O funil visual pode mostrar pedidos online por status e, em paralelo, performance da loja física."
+    },
+    {
+      "title": "UX de conversão em landpage e checkout",
+      "kind": "method",
+      "category": "conversion",
+      "keywords": ["checkout", "landpage", "cta", "conversão", "fricção"],
+      "validation": "source_validated",
+      "content": "Reduza fricção: CTA claro acima da dobra, benefícios objetivos, prova social quando houver, checkout com poucos passos, progresso visível, confiança (segurança, garantia, contato). No PDV o 'checkout' é a finalização rápida — a fricção aí é demora e complexidade desnecessária."
+    },
+    {
+      "title": "Evite funil de mentira",
+      "kind": "rule",
+      "category": "anti-pattern",
+      "keywords": ["fake", "métricas inventadas", "funil genérico"],
+      "validation": "source_validated",
+      "content": "Não monte funil com estágios que o produto não opera. Não mostre taxa de conversão sem eventos reais. Não use gráfico de funil decorativo. Se for demo, use seed coerente e rotule. Funil útil é o que reflete o processo real de venda do negócio."
+    }
+  ]
+}

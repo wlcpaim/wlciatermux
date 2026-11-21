@@ -1,0 +1,87 @@
+{
+  "name": "UI/UX Profissional de Alta Qualidade",
+  "slug": "ui-profissional",
+  "description": "Padrões de interface e experiência que elevam qualquer produto digital do visual genérico de IA para padrão de produto real de mercado.",
+  "knowledge": [
+    {
+      "title": "Hierarquia visual e composição de tela",
+      "kind": "rule",
+      "category": "ui",
+      "keywords": ["hierarquia", "layout", "composição", "visual", "tela", "ui"],
+      "validation": "source_validated",
+      "content": "Toda tela precisa de hierarquia clara: (1) Título da página + ação primária no topo. (2) Conteúdo principal com peso visual maior. (3) Ações secundárias menos proeminentes. (4) Metadados e informações auxiliares em texto menor/muted. Use espaçamento generoso (não aperte tudo). Evite o padrão 'card grid de estatísticas genéricas' que grita 'dashboard de IA'."
+    },
+    {
+      "title": "Sistema de cores profissional (não use roxo/azul genérico)",
+      "kind": "method",
+      "category": "design",
+      "keywords": ["cor", "cores", "palette", "tema", "dark", "light"],
+      "validation": "source_validated",
+      "content": "Escolha uma cor primária com intenção (marca, setor ou personalidade). Construa escala de neutros (background → surface → border → text-muted → text). Use sucesso/alerta/erro só para status. Em dark mode: fundos quase pretos com elevação sutil, não cinza médio. Evite o combo clássico de IA: fundo escuro + roxo neon + cards com borda luminosa. Prefira sofisticação e legibilidade."
+    },
+    {
+      "title": "Tipografia que transmite qualidade",
+      "kind": "rule",
+      "category": "design",
+      "keywords": ["tipografia", "fonte", "texto", "font", "hierarquia tipográfica"],
+      "validation": "source_validated",
+      "content": "Use no máximo 2 famílias (uma sans para UI + opcionalmente uma display). Defina escala tipográfica clara: text-xs, sm, base, lg, xl, 2xl. Títulos com peso 600-700, corpo 400-500. Line-height generoso em textos longos (1.5-1.7). Evite fontes genéricas demais ou fontes display em interfaces de produtividade. Inter, Geist, Plus Jakarta Sans, DM Sans e similares funcionam bem."
+    },
+    {
+      "title": "Componentes de formulário de nível profissional",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["form", "formulário", "input", "validação", "campo"],
+      "validation": "source_validated",
+      "content": "Todo formulário profissional: labels visíveis, placeholders como exemplo (não como label), validação em tempo real ou no blur, mensagens de erro específicas por campo, botão de submit com loading state e disabled enquanto inválido/enviando, agrupamento lógico de campos, espaçamento consistente. Nunca use só borda vermelha sem texto de erro."
+    },
+    {
+      "title": "Estados de interface que passam confiança",
+      "kind": "rule",
+      "category": "ux",
+      "keywords": ["estado", "loading", "skeleton", "empty", "erro", "sucesso"],
+      "validation": "source_validated",
+      "content": "Loading: preferir skeleton que imita o layout real em vez de spinner central genérico. Empty: mensagem humana + ação clara. Erro: explique o que aconteceu e o que o usuário pode fazer. Sucesso: confirmação breve (toast) e, quando relevante, atualize a UI imediatamente. Transições suaves (150-250ms) passam mais profissionalismo que mudanças abruptas."
+    },
+    {
+      "title": "Navegação e estrutura de app",
+      "kind": "architecture",
+      "category": "ux",
+      "keywords": ["navegação", "menu", "sidebar", "header", "mobile", "nav"],
+      "validation": "source_validated",
+      "content": "Apps com poucas seções: bottom nav no mobile + top nav ou sidebar no desktop. Apps complexos: sidebar colapsável + breadcrumbs quando houver hierarquia. Sempre destaque a rota ativa. No de usuário e ações globais em posição previsível (canto superior direito). Em mobile, priorize o polegar: ações principais acessíveis na metade inferior da tela."
+    },
+    {
+      "title": "Microinterações e feedback",
+      "kind": "method",
+      "category": "ux",
+      "keywords": ["microinteração", "hover", "feedback", "animação", "toast"],
+      "validation": "source_validated",
+      "content": "Botões devem ter hover e active states. Ações destrutivas pedem confirmação. Toasts devem ser discretos e auto-dismiss (3-5s) com opção de fechar. Evite animações longas ou chamativas. O feedback deve comunicar estado, não entreter. Preferir motion sutil (opacity, translateY leve) a efeitos exagerados."
+    },
+    {
+      "title": "Tabelas e listagens profissionais",
+      "kind": "method",
+      "category": "ui",
+      "keywords": ["tabela", "lista", "listagem", "datagrid", "paginação"],
+      "validation": "source_validated",
+      "content": "Listagens devem ter: busca, filtros essenciais, ordenação quando fizer sentido, paginação ou infinite scroll, ações por linha (editar/excluir/ver), empty state e loading. Em mobile, transforme tabela em cards. Mostre apenas colunas realmente úteis. Ações em massa só quando o caso de uso justificar."
+    },
+    {
+      "title": "Modais, drawers e overlays",
+      "kind": "rule",
+      "category": "ui",
+      "keywords": ["modal", "drawer", "dialog", "overlay", "sheet"],
+      "validation": "source_validated",
+      "content": "Use modal para ações focadas e curtas (confirmar, formulário pequeno). Use drawer/sheet para conteúdos mais longos ou em mobile. Sempre permita fechar com ESC e clique fora (exceto em fluxos críticos). Trave o scroll do body. Foque o primeiro campo ao abrir. Não empilhe múltiplos modais."
+    },
+    {
+      "title": "Dark mode e temas com qualidade",
+      "kind": "method",
+      "category": "design",
+      "keywords": ["dark mode", "tema", "theme", "modo escuro"],
+      "validation": "source_validated",
+      "content": "Dark mode profissional usa elevação por camadas de superfície (não só inverter cores). Bordas ficam mais sutis. Texto precisa de contraste real (não cinza médio em fundo escuro). Teste legibilidade. Se o produto for predominantemente usado à noite ou por devs, dark-first pode ser melhor. Sempre ofereça alternância clara."
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "name": "Programação: Criar e Editar Arquivos",
+  "slug": "programacao-arquivos",
+  "description": "Disciplina de programação do modo Criar: quando usar write_file vs patch_file, como estruturar código modular e como editar sem quebrar o que funciona.",
+  "knowledge": [
+    {
+      "title": "write_file = arquivo novo ou reescrita total",
+      "kind": "rule",
+      "category": "tools",
+      "keywords": ["write_file", "criar arquivo", "arquivo novo", "gravar", "novo arquivo"],
+      "validation": "source_validated",
+      "content": "Use write_file quando o path AINDA NÃO EXISTE no repositório, ou quando precisa reescrever o arquivo inteiro de propósito. O parâmetro content deve ser o arquivo COMPLETO (HTML/CSS/JS válido de ponta a ponta), não um fragmento. Em arquivo novo não precisa de read_file. Em arquivo existente, read_file é OBRIGATÓRIO antes do write_file — senão a ferramenta rejeita."
+    },
+    {
+      "title": "patch_file = editar trecho de arquivo existente",
+      "kind": "rule",
+      "category": "tools",
+      "keywords": ["patch_file", "editar", "alterar arquivo", "modificar", "patch"],
+      "validation": "source_validated",
+      "content": "Prefira patch_file quando o arquivo já existe e a mudança é local. Fluxo: (1) read_file, (2) copie um old_text EXATO e único do conteúdo retornado, (3) patch_file com old_text → new_text. Nunca invente old_text de memória. Se o patch falhar porque old_text não foi encontrado, faça read_file de novo e use um trecho maior/único. Patch evita apagar o resto do arquivo."
+    },
+    {
+      "title": "Decisão rápida: qual ferramenta usar",
+      "kind": "method",
+      "category": "tools",
+      "keywords": ["ferramenta", "quando usar", "write ou patch", "criar ou editar"],
+      "validation": "source_validated",
+      "content": "1) list_files ou analyze_repository — o path existe? 2) NÃO existe → write_file com conteúdo completo. 3) Existe e mudança pequena → read_file + patch_file. 4) Existe e precisa reescrever quase tudo → read_file + write_file com conteúdo completo novo. 5) Não sabe onde está o símbolo → search_codebase antes."
+    },
+    {
+      "title": "Estrutura modular ao criar projeto do zero",
+      "kind": "architecture",
+      "category": "code",
+      "keywords": ["modular", "estrutura", "pastas", "arquivos", "do zero", "scaffold"],
+      "validation": "source_validated",
+      "content": "Projeto web estático profissional mínimo: index.html (shell + nav), css/styles.css (tokens + layout), js/store.js (dados/persistência), js/app.js (roteamento e UI). Opcional: js/views/*.js por tela. Cada write_file cria UM módulo coeso. Proibido despejar tudo em um único app.js de 800 linhas. Ligue os arquivos com <link> e <script type=\"module\">."
+    },
+    {
+      "title": "Conteúdo de write_file deve ser código válido",
+      "kind": "rule",
+      "category": "code",
+      "keywords": ["html válido", "javascript", "css", "sintaxe", "qualidade"],
+      "validation": "source_validated",
+      "content": "Ao criar arquivo: HTML com tags fechadas e charset; CSS com seletores válidos e variables no :root; JS sem erros de sintaxe óbvios, com export/import coerentes. Paths nos imports devem apontar para arquivos que você vai criar ou que já existem. Não deixe script quebrado 'para depois'."
+    },
+    {
+      "title": "Editar sem destruir o que funciona",
+      "kind": "method",
+      "category": "code",
+      "keywords": ["preservar", "refatorar", "editar seguro", "não quebrar"],
+      "validation": "source_validated",
+      "content": "Antes de editar: leia o arquivo e entenda dependências (quem importa este módulo). Mude o mínimo necessário. Não renomeie símbolos globais sem atualizar todos os usos (search_codebase ajuda). Não apague handlers que ainda são referenciados. Após patch, confira se o resultado verified=true."
+    },
+    {
+      "title": "Erros comuns e como corrigir na hora",
+      "kind": "method",
+      "category": "errors",
+      "keywords": ["erro", "sha", "read_file", "falha", "path", "old_text"],
+      "validation": "source_validated",
+      "content": "Erro 'Leia o arquivo com read_file antes' → chame read_file nesse path e repita write/patch. Erro de SHA/conflito → read_file de novo e reaplique. Erro old_text não encontrado → o trecho não é único ou está desatualizado; releia e use trecho maior. Path inválido → use caminho relativo simples sem ../ escapando do repo. Sem repo/autorização → não insista em write; informe o bloqueio."
+    },
+    {
+      "title": "Ordem de criação de arquivos em app novo",
+      "kind": "method",
+      "category": "workflow",
+      "keywords": ["ordem", "sequência", "criar projeto", "primeiro arquivo"],
+      "validation": "source_validated",
+      "content": "Ordem recomendada: (1) css/styles.css com design tokens, (2) js/store.js com dados e persistência, (3) index.html ligando CSS/JS, (4) js/app.js com fluxo principal, (5) views/componentes extras. Assim cada passo já referencia algo que existe. Evite criar HTML que aponta para JS ainda inexistente sem criar o JS em seguida na mesma execução."
+    },
+    {
+      "title": "Programar de verdade, não só descrever código",
+      "kind": "rule",
+      "category": "behavior",
+      "keywords": ["programar", "implementar", "código real", "não explicar"],
+      "validation": "source_validated",
+      "content": "No modo Criar o trabalho é GRAVAR código via ferramentas, não colar código só na mensagem de chat. Explicação longa sem write_file/patch_file é falha. Depois de gravar, um resumo curto com caminhos basta. Se precisar de vários arquivos, grave vários — não peça para o usuário copiar código manualmente."
+    },
+    {
+      "title": "Commit messages úteis",
+      "kind": "rule",
+      "category": "git",
+      "keywords": ["commit", "mensagem", "commit_message"],
+      "validation": "source_validated",
+      "content": "commit_message curta e específica: 'Adiciona store de produtos com localStorage', 'Corrige cálculo do total no checkout', 'Cria tokens CSS e layout base'. Evite 'update', 'fix', 'ajuste' genéricos."
+    }
+  ]
+}
